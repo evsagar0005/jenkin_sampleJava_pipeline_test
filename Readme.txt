@@ -8,8 +8,16 @@ create ajava pipeline, connecting github rep to it.
 have below pipeline code and run
 
 pipeline {
-    agent any
+    agent {
+        label 'linux'
+    }
     stages {
+        stage('Git-checkout') {
+            steps {
+                echo 'Checking out git repo'
+                git branch: 'main', url: 'https://github.com/evsagar0005/jenkin_sampleJava_pipeline_test.git'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'javac HelloJenkins.java'
@@ -21,7 +29,20 @@ pipeline {
             }
         }
     }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
